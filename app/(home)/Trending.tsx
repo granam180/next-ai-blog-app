@@ -1,5 +1,6 @@
 import { Post } from "@prisma/client";
 import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -12,10 +13,14 @@ const TrendingCard = ({ className, post }: TrendingCardProps) => {
   return (
     <Link
       className={`${className} sm:mt-0 sm:h-auto relative mt-7 block w-full h-96 hover:opacity-70`}
-      href={`${process.env.NEXT_PUBLIC_URL}/post/${post?.id}`}
+      // href={`${process.env.NEXT_PUBLIC_URL}/post/${post?.id}`}
+      href="/"
     >
       <div className="z-0 relative w-full h-full">
-        {/* <Image
+        {/* NextJS Image Optimization specifications for responsive screen-sizes 
+            - can be setup to define responsive styles in the Image properties
+        */}
+        <Image
           fill
           alt="tech"
           placeholder="blur"
@@ -25,8 +30,9 @@ const TrendingCard = ({ className, post }: TrendingCardProps) => {
                 (max-width: 1060px) 50vw,
                 33vw"
           style={{ objectFit: "cover" }}
-        /> */}
+        />
       </div>
+      {/* Default to the top and span all the way across */}
       <div className="absolute z-1 top-0 left-0 w-full h-full bg-gradient-gradual" />
       <div className="absolute z-2 bottom-0 left-0 p-3">
         <h4 className="inline-block px-5 py-1 font-semibold bg-accent-orange text-wh-900">
@@ -38,6 +44,7 @@ const TrendingCard = ({ className, post }: TrendingCardProps) => {
   );
 };
 
+// Props set here to use in Trending component as well
 type Props = {
   trendingPosts: Array<Post>;
 };
@@ -71,7 +78,7 @@ const Trending = ({ trendingPosts }: Props) => {
       <div className="sm:grid gap-5 grid-cols-4 grid-rows-2 sm:h-[600px] my-3">
         <TrendingCard
           className="col-span-2 row-span-2 bg-wh-500"
-          post={trendingPosts[0]}
+          post={trendingPosts[0]} // <Post>
         />
         <TrendingCard
           className="col-span-2 row-span-1 bg-wh-500"

@@ -27,6 +27,7 @@ const EditorMenuBar = ({ editor }: Props) => {
               : "p-1"
           }
         >
+          {/* Heading H1 */}
           H<span className="text-xs">1</span>
         </button>
         <button
@@ -40,6 +41,7 @@ const EditorMenuBar = ({ editor }: Props) => {
               : "p-1"
           }
         >
+          {/* Heading H2 */}
           H<span className="text-xs">2</span>
         </button>
         <button
@@ -53,6 +55,7 @@ const EditorMenuBar = ({ editor }: Props) => {
               : "p-1"
           }
         >
+          {/* Heading H3/ Paragraph */}
           H<span className="text-xs">3</span>
         </button>
         <button
@@ -76,6 +79,7 @@ const EditorMenuBar = ({ editor }: Props) => {
               : "p-1"
           }
         >
+          {/* italicize */}
           <b>B</b>
         </button>
         <button

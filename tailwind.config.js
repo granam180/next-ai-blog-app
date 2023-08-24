@@ -14,7 +14,7 @@ module.exports = {
         "accent-orange": "#F6CF68",
         "accent-green": "#C2E9B4",
       },
-      backgroundImage: (theme) => ({
+      backgroundImage: (theme) => ({ // workaround for adding gradient to bg image in tw
         "gradient-gradual":
           "linear-gradient(180deg, rgba(116, 116, 116, 0) 66.15%, #000000 100%)",
       }),

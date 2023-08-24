@@ -3,16 +3,17 @@ import React from "react";
 import { Post as PostType } from "@prisma/client";
 import { FormattedPost } from "@/app/types";
 import Sidebar from "@/app/(shared)/Sidebar";
-import Content from "@/app/post/[id]/Content";
+import Content from "./Content";
 
 type Props = {
-  params: { id: string };
+  params: { id: string }; // now can access the id to pass the url query string
 };
 
 export const revalidate = 60;
 
 const getPost = async (id: string) => {
   const post: PostType | null = await prisma.post.findUnique({
+    // grab the relevant post set in the proper location
     where: { id },
   });
 

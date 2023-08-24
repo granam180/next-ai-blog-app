@@ -1,3 +1,5 @@
+// Group component
+
 import React from "react";
 import Card from "app/(shared)/Card";
 import { Post } from "@prisma/client";

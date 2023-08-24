@@ -1,4 +1,5 @@
-"use client";
+"use client"; // client component filled with interactions
+
 import { FormattedPost } from "@/app/types";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -14,16 +15,21 @@ type Props = {
 };
 
 const Content = ({ post }: Props) => {
+  // Posts can be editable
+  // Editable state or not
   const [isEditable, setIsEditable] = useState<boolean>(false);
 
+  // Posts has a title, error and temporary title state to track
   const [title, setTitle] = useState<string>(post.title);
   const [titleError, setTitleError] = useState<string>("");
   const [tempTitle, setTempTitle] = useState<string>(title);
 
+  // Post has content, error, and temporary content state to track
   const [content, setContent] = useState<string>(post.content);
   const [contentError, setContentError] = useState<string>("");
   const [tempContent, setTempContent] = useState<string>(content);
 
+  // formatted Date `post` type
   const date = new Date(post?.createdAt);
   const options = { year: "numeric", month: "long", day: "numeric" } as any;
   const formattedDate = date.toLocaleDateString("en-US", options);
@@ -33,21 +39,26 @@ const Content = ({ post }: Props) => {
     editor?.setEditable(bool);
   };
 
+  // handling the Title text
   const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (title) setTitleError("");
     setTitle(e.target.value);
   };
 
-  const handleOnChangeContent = ({ editor }: any) => {
+  // handling the Content text
+  const handleOnChangeContent = ({ editor }: any) => {  // not sure which Typescript to use here, setting type for now
+    // `Editor` is part of tip-tap editor
     if (!(editor as Editor).isEmpty) setContentError("");
     setContent((editor as Editor).getHTML());
   };
 
   const editor = useEditor({
+    // aligning everything inside the `editor` to state of the `contentn`
     extensions: [StarterKit],
     onUpdate: handleOnChangeContent,
     editorProps: {
       attributes: {
+        // prose styling classes for Page Editor, remove the outline around editor
         class:
           "prose prose-sm xl:prose-2xl leading-8 focus:outline-none w-full max-w-full",
       },
@@ -64,6 +75,7 @@ const Content = ({ post }: Props) => {
     if (editor?.isEmpty) setContentError("This field is required.");
     if (title === "" || editor?.isEmpty) return;
 
+    // API response grabbed from the backend
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/post/${post?.id}`,
       {
@@ -79,6 +91,8 @@ const Content = ({ post }: Props) => {
     );
     const data = await response.json();
 
+    // update states
+
     handleIsEditable(false);
     setTempTitle("");
     setTempContent("");
@@ -89,12 +103,18 @@ const Content = ({ post }: Props) => {
   };
 
   return (
+    /**
+     * The official Tailwind CSS Typography plugin provides a set of `prose` classes 
+     * you can use to add beautiful typographic defaults to any vanilla HTML you don’t control, 
+     * like HTML rendered from Markdown, or pulled from a CMS.
+     */
     <div className="prose w-full max-w-full mb-10">
       {/* BREADCRUMBS */}
       <h5 className="text-wh-300">{`Home > ${post.category} > ${post.title}`}</h5>
 
       {/* CATEGORY AND EDIT */}
       <CategoryAndEdit
+      // pass in ALL Category/Edit state
         isEditable={isEditable}
         handleIsEditable={handleIsEditable}
         title={title}
@@ -122,6 +142,7 @@ const Content = ({ post }: Props) => {
                 <p className="mt-1 text-primary-500">{titleError}</p>
               )}
             </div>
+            // if post is NOT editable
           ) : (
             <h3 className="font-bold text-3xl mt-3">{title}</h3>
           )}

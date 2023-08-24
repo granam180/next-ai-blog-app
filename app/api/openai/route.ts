@@ -18,7 +18,7 @@ export async function POST(request: Request, response: any) {
           {
             role: "user",
             // content: `Create small blog post with html tags based on this title: ${title}`,
-            content: `Create 3 line blog post with html tags based on this title: ${title}`,
+            content: `Create 2 paragraph blog post with html tags based on this title: ${title}`,
           },
           {
             role: "system",
@@ -28,6 +28,7 @@ export async function POST(request: Request, response: any) {
           },
         ],
       });
+      // console.log("🚀 ~ file: route.ts:15 ~ POST ~ aiResponse:", aiResponse)
 
     // response.revalidate("/api/posts")
     return NextResponse.json(

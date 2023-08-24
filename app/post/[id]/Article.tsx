@@ -26,6 +26,7 @@ const Article = ({
 
   const postAiContent = async () => {
     editor
+    // part of tip tap content editor feature
       .chain()
       .focus()
       .setContent("Generating Ai Content. Please Wait...")
@@ -55,6 +56,7 @@ const Article = ({
           <div className="flex gap-5 justify-between">
             <input
               className="border-2 rounded-md bg-wh-50 px-3 py-1 w-full"
+              // role the Ai bot will play
               placeholder="Role"
               onChange={(e) => setRole(e.target.value)}
               value={role}

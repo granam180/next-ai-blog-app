@@ -1,3 +1,5 @@
+// Group component
+
 import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,8 +20,10 @@ const Card = ({
   isSmallCard = false,
   isLongForm = false,
 }: Props) => {
-  const { id, title, author, createdAt, image, snippet } = post || {};
+  const { id, title, author, createdAt, image, snippet } = post || {}; // <Post> destructuring
 
+
+  // formatting date properly
   const date = new Date(createdAt);
   const options = { year: "numeric", month: "long", day: "numeric" } as any;
   const formattedDate = date.toLocaleDateString("en-US", options);
@@ -46,6 +50,7 @@ const Card = ({
       </Link>
       <div className="basis-full">
         <Link href={`${process.env.NEXT_PUBLIC_URL}/post/${post?.id}`}>
+          {/* isSmallCard conditional */}
           <h4
             className={`font-bold hover:text-accent-green
             ${isSmallCard ? "text-base" : "text-lg"}
@@ -55,7 +60,10 @@ const Card = ({
             {title}
           </h4>
         </Link>
-
+        
+        {/* Small cards = 2 lines
+            Large cards = same line
+        */}
         <div className={`${isSmallCard ? "my-2" : "flex my-3"} gap-3`}>
           <h5 className="font-semibold text-xs">{author}</h5>
           <h6 className="text-wh-300 text-xs">{formattedDate}</h6>
