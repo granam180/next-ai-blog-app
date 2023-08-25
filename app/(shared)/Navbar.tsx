@@ -28,7 +28,7 @@ const Navbar = (props: Props) => {
           <h1 className="font-bold text-3xl md:text-5xl">CREATE-A-BLOG</h1>
           <h5 className="text-base md:text-xl">Blog dedicated towards AI generated blogging content.</h5>
           <p className="text-sm mt-3">
-            Blog dedicated towards AI generated blogging content. Editing a blog post below updates the <em>Trending</em> section, and can set an AI writer to fill in content based on blog post header
+            Editing a blog post below updates the <em>Trending</em> section, and can set an AI writer to fill in content based on blog post header
           </p>
         </div>
         <div className="basis-full relative w-auto h-32 bg-wh-500">
